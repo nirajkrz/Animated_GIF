@@ -1,4 +1,4 @@
-importScripts('NeuQuant.js');
+//importScripts('NeuQuant.js');
 
 function run(data) {
     var length = Object.keys(data).length;
@@ -49,8 +49,9 @@ function run(data) {
     });
 }
 
-self.onmessage = function(ev) {
-    var data = ev.data;
+//self.onmessage = function(ev) {
+onmessage = function(ev) {
+   var data = ev.data;
     var response = run(data);
     postMessage(response);
 };

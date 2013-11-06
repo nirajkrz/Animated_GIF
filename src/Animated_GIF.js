@@ -21,10 +21,26 @@ function Animated_GIF(options) {
 
     options = options || {};
     numWorkers = options.numWorkers || 2;
-    workerPath = options.workerPath || 'src/quantizer.js'; // XXX hardcoded path
+    // workerPath = options.workerPath || 'src/quantizer.js'; // XXX hardcoded path
+
+    var quantizerFunction = require('./worker');
+    var workerURL = workerify(quantizerFunction);
+
+
+    function workerify(f) {
+        var functionCode = f+"";
+       
+        // we'll remove the first and last lines which have the 'function() {' and '}' 
+        var workerCode = functionCode.split('\n');
+        workerCode.shift();
+        workerCode.pop();
+        workerCode = workerCode.join('\n');
+        
+        return URL.createObjectURL(new Blob([ workerCode ]));
+    }
 
     for(var i = 0; i < numWorkers; i++) {
-        var w = new Worker(workerPath);
+        var w = new Worker(workerURL);
         workers.push(w);
         availableWorkers.push(w);
     }
