@@ -3,8 +3,13 @@
 // and Anthony Dekker's NeuQuant quantizer (JS 0.3 version with many fixes)
 //
 // @author sole / http://soledadpenades.com
+
+
 function Animated_GIF(options) {
     'use strict';
+
+    var omggif = require('./omggif');
+    var GifWriter = omggif.GifWriter;
 
     var width = 160, height = 120, canvas = null, ctx = null, repeat = 0, delay = 250;
     var frames = [];
@@ -240,8 +245,10 @@ function Animated_GIF(options) {
 
 }
 
-if(define) {
+/*if(define) {
     define([], function() {
         return Animated_GIF;
     });
-}
+}*/
+
+module.exports = Animated_GIF;
