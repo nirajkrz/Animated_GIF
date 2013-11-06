@@ -255,10 +255,19 @@ function Animated_GIF(options) {
 module.exports = Animated_GIF;
 
 },{"./omggif":3}],2:[function(require,module,exports){
-var ag = require('./Animated_GIF');
+(function() {
 
-window.Animated_GIF = ag;
+    var Animated_GIF = require('./Animated_GIF');
 
+    // Supposedly should make the bundle compatible with require.js
+    if(typeof define === 'function' && define.amd) {
+        define(function() { return Animated_GIF; });
+    } else {
+        // Otherwise just tuck it into the window object
+        window.Animated_GIF = Animated_GIF;
+    }
+
+})();
 
 },{"./Animated_GIF":1}],3:[function(require,module,exports){
 // (c) Dean McNamee <dean@gmail.com>, 2013.
