@@ -30,13 +30,13 @@ function Animated_GIF(options) {
 
     function workerify(f) {
         var functionCode = f+"";
-        console.log(functionCode);
-        //var workerCode = (f+"").match(/{(.*)}/)[1];
+       
+        // we'll remove the first and last lines which have the 'function() {' and '}' 
         var workerCode = functionCode.split('\n');
         workerCode.shift();
         workerCode.pop();
         workerCode = workerCode.join('\n');
-        console.log(workerCode);
+        
         return URL.createObjectURL(new Blob([ workerCode ]));
     }
 

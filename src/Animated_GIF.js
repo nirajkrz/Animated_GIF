@@ -21,7 +21,6 @@ function Animated_GIF(options) {
 
     options = options || {};
     numWorkers = options.numWorkers || 2;
-    // workerPath = options.workerPath || 'src/quantizer.js'; // XXX hardcoded path
 
     var quantizerFunction = require('./worker');
     var workerURL = workerify(quantizerFunction);
